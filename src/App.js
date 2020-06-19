@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import RegisterPage from "./components/RegisterPage";
+import "./assets/scss/blk-design-system-react.scss";
+import "./assets/css/nucleo-icons.css";
+import "./assets/css/custom.css";
+import LandingPage from "./components/LandingPage";
+import LoginPage from "./components/LoginPage";
+import SourcesPage from "./components/SourcesPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path="/register"
+          render={(props) => <RegisterPage {...props}></RegisterPage>}
+        ></Route>
+        <Route
+          path="/login"
+          render={(props) => <LoginPage {...props}></LoginPage>}
+        ></Route>
+        <Route
+          path="/home"
+          render={(props) => <LandingPage {...props}></LandingPage>}
+        ></Route>
+        <Route
+          path="/sources"
+          render={(props) => <SourcesPage {...props}></SourcesPage>}
+        ></Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
