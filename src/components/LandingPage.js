@@ -17,6 +17,7 @@
 */
 import React from "react";
 import axios from "axios";
+
 // reactstrap components
 import {
   Button,
@@ -38,31 +39,14 @@ import {
 
 // core components
 import ExamplesNavbar from "./ExamplesNavbar.js";
-import Carousel from "./Carousel";
+import Carousell from "./Carousel";
 import Footer from "./Footer.js";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
 import Tabs from "./Tabs.js";
-import Articles from "./Articles.js";
+import ArticlesPage from "./ArticlesPage.js";
+import SourcesPage from "./SourcesPage";
 
 class LandingPage extends React.Component {
-  state = { articles: [] };
-  componentDidMount() {
-    const getNews = async () => {
-      axios
-        .get(`${process.env.URL}/user/feed`, {
-          headers: { Authorization: localStorage.getItem("token") },
-        })
-        .then(({ data }) => {
-          this.setState({ articles: data });
-        })
-        .catch((err) => {
-          console.log(err);
-          // 422 error no token => redirect to login page
-          this.props.history.push("/login");
-        });
-    };
-    getNews();
-  }
   render() {
     return (
       <>
@@ -72,16 +56,78 @@ class LandingPage extends React.Component {
           <div
             class="card card-nav-tabs card-plain"
             style={{
-              paddingTop: "30vh",
+              paddingTop: "20vh",
               paddingLeft: "10vw",
               paddingRight: "10vw",
             }}
           >
             <Row>
-              <Col></Col>
               <Col>
-                <Carousel />
+                <div className="content-center">
+                  <Row className="row-grid justify-content-between align-items-center text-left">
+                    <Col lg="6" md="6">
+                      <h1 className="text-white">
+                        We keep your coin <br />
+                        <span className="text-white">secured</span>
+                      </h1>
+                      <p className="text-white mb-3">
+                        A wonderful serenity has taken possession of my entire
+                        soul, like these sweet mornings of spring which I enjoy
+                        with my whole heart. I am alone, and feel...
+                      </p>
+                      <div className="btn-wrapper mb-3">
+                        <p className="category text-success d-inline">
+                          From 9.99%/mo
+                        </p>
+                        <Button
+                          className="btn-link"
+                          color="success"
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                          size="sm"
+                        >
+                          <i className="tim-icons icon-minimal-right" />
+                        </Button>
+                      </div>
+                      <div className="btn-wrapper">
+                        <div className="button-container">
+                          <Button
+                            className="btn-icon btn-simple btn-round btn-neutral"
+                            color="default"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          ></Button>
+                          <Button
+                            className="btn-icon btn-simple btn-round btn-neutral"
+                            color="default"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <i className="fab fa-dribbble" />
+                          </Button>
+                          <Button
+                            className="btn-icon btn-simple btn-round btn-neutral"
+                            color="default"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <i className="fab fa-facebook" />
+                          </Button>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg="4" md="5">
+                      <img
+                        alt="..."
+                        className="img-fluid"
+                        src={"./assets/img/etherum.png"}
+                      />
+                    </Col>
+                  </Row>
+                </div>
               </Col>
+
+              <Carousell />
             </Row>
             <Tabs {...this.props}></Tabs>
           </div>
@@ -94,52 +140,16 @@ class LandingPage extends React.Component {
                 padding: "0px",
               }}
             >
-              {this.state.articles === "no subscriptions" ? (
-                <div
-                  style={{
-                    width: "60vw",
-                  }}
-                  class="alert alert-primary"
-                  role="alert"
-                >
-                  You are not subscribed to any news sources. Go to{" "}
-                  <Link to="/sources" class="alert-link">
-                    sources page{" "}
-                  </Link>
-                  and start subscribing.
-                </div>
-              ) : (
-                <Articles articles={this.state.articles}></Articles>
-              )}
-
-              {/* {this.state.articles.length > 25 ? (
-                <Articles articles={this.state.articles}></Articles>
-              ) : (
-                <div
-                  style={{
-                    width: "60vw",
-                  }}
-                  class="alert alert-primary"
-                  role="alert"
-                >
-                  Loading..............
-                </div>
-              )}  */}
-              {/* {this.state.articles === "" && (
-                <div
-                  style={{
-                    width: "60vw",
-                  }}
-                  class="alert alert-primary"
-                  role="alert"
-                >
-                  You are not subscribed to any news sources. Go to{" "}
-                  <Link to="/sources" class="alert-link">
-                    sources page{" "}
-                  </Link>
-                  and start subscribing.
-                </div>
-              )} */}
+              <Switch>
+                <Route
+                  path={"/home"}
+                  render={() => <ArticlesPage {...this.props}></ArticlesPage>}
+                ></Route>
+                <Route
+                  path={"/sources"}
+                  render={() => <SourcesPage {...this.props}></SourcesPage>}
+                ></Route>
+              </Switch>
             </section>
           </section>
 
@@ -168,71 +178,7 @@ class LandingPage extends React.Component {
             />
 
            
-             {/* <div className="content-center">
-              <Row className="row-grid justify-content-between align-items-center text-left">
-                <Col lg="6" md="6">
-                  <h1 className="text-white">
-                    We keep your coin <br />
-                    <span className="text-white">secured</span>
-                  </h1>
-                  <p className="text-white mb-3">
-                    A wonderful serenity has taken possession of my entire soul,
-                    like these sweet mornings of spring which I enjoy with my
-                    whole heart. I am alone, and feel...
-                  </p>
-                  <div className="btn-wrapper mb-3">
-                    <p className="category text-success d-inline">
-                      From 9.99%/mo
-                    </p>
-                    <Button
-                      className="btn-link"
-                      color="success"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      <i className="tim-icons icon-minimal-right" />
-                    </Button>
-                  </div>
-                  <div className="btn-wrapper">
-                    <div className="button-container">
-                      <Button
-                        className="btn-icon btn-simple btn-round btn-neutral"
-                        color="default"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        className="btn-icon btn-simple btn-round btn-neutral"
-                        color="default"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className="fab fa-dribbble" />
-                      </Button>
-                      <Button
-                        className="btn-icon btn-simple btn-round btn-neutral"
-                        color="default"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg="4" md="5">
-                  <img
-                    alt="..."
-                    className="img-fluid"
-                    src={"./assets/img/etherum.png"}
-                  />
-                </Col>
-              </Row>
-            </div>
-    </div>
+             
     <section className="section section-lg">
             <img alt="..." className="path" src={"./assets/img/path4.png"} />
 

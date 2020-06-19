@@ -3,17 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@hapi/joi": "^17.1.1",
     "axios": "^0.19.2",
     "chart.js": "2.9.3",
     "classnames": "2.2.6",
-    "gulp": "4.0.2",
+    "dotenv": "^8.2.0",
+    "gulp": "^4.0.2",
     "gulp-append-prepend": "1.0.8",
     "moment": "2.24.0",
     "node-sass": "4.13.1",
     "nouislider": "14.2.0",
     "perfect-scrollbar": "1.5.0",
     "react": "16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-bootstrap-switch": "15.5.3",
     "react-chartjs-2": "2.9.0",
     "react-datetime": "2.16.3",
@@ -35,14 +38,16 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "optionalDependencies": {
-    "eslint-plugin-flowtype": "3.13.0",
-    "typescript": "3.8.3"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

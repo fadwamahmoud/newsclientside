@@ -62,7 +62,8 @@ class LoginPage extends React.Component {
     },
   };
 
-  handleSubmit = async () => {
+  handleSubmit = async (e) => {
+    e.preventDefault();
     if (Object.keys(this.state.errors).length === 0) {
       const user = {
         email: this.state.email,
@@ -71,7 +72,7 @@ class LoginPage extends React.Component {
 
       // login request
       axios
-        .post(`${process.env.URL}/user/login`, user)
+        .post(`${process.env.REACT_APP_HEROKU_URL}/user/login`, user)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
           this.props.history.push("/home");
@@ -130,20 +131,21 @@ class LoginPage extends React.Component {
               <Container>
                 <Row>
                   <Col className="offset-lg-0 offset-md-3" lg="5" md="6">
-                    <Card className="card-register">
-                      <CardHeader>
-                        <CardImg
-                          alt="..."
-                          src={"./assets/img/square-purple-1.png"}
-                        />
-                        <CardTitle tag="h4">Login</CardTitle>
-                      </CardHeader>
-                      <CardBody>
-                        <Form
-                          onSubmit={this.handleValidation}
-                          style={{ display: "flex", flexDirection: "column" }}
-                          className="form"
-                        >
+                    <Form
+                      method="post"
+                      onSubmit={this.handleSubmit}
+                      style={{ display: "flex", flexDirection: "column" }}
+                      className="form"
+                    >
+                      <Card className="card-register">
+                        <CardHeader>
+                          <CardImg
+                            alt="..."
+                            src={"./assets/img/square-purple-1.png"}
+                          />
+                          <CardTitle tag="h4">Login</CardTitle>
+                        </CardHeader>
+                        <CardBody>
                           <InputGroup
                             className={
                               this.state.errors.email
@@ -195,7 +197,7 @@ class LoginPage extends React.Component {
                               onChange={this.handleValidation}
                               name="password"
                               placeholder="Password"
-                              type="text"
+                              type="password"
                               onFocus={(e) =>
                                 this.setState({ passwordFocus: true })
                               }
@@ -209,25 +211,24 @@ class LoginPage extends React.Component {
                               {this.state.errors.password}
                             </span>
                           )}
-                        </Form>
-                        {this.state.invalidMsg && (
-                          <span className="errorspan">
-                            {this.state.invalidMsg}
-                          </span>
-                        )}
-                      </CardBody>
-                      <CardFooter>
-                        <Button
-                          type="submit"
-                          onClick={this.handleSubmit}
-                          className="btn-round"
-                          color="primary"
-                          size="lg"
-                        >
-                          Login
-                        </Button>
-                      </CardFooter>
-                    </Card>
+                          {this.state.invalidMsg && (
+                            <span className="errorspan">
+                              {this.state.invalidMsg}
+                            </span>
+                          )}
+                        </CardBody>
+                        <CardFooter>
+                          <Button
+                            type="submit"
+                            className="btn-round"
+                            color="primary"
+                            size="lg"
+                          >
+                            Login
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </Form>
                   </Col>
                 </Row>
                 <div className="register-bg" />

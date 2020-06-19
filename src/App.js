@@ -21,12 +21,12 @@ function App() {
           render={(props) => <LoginPage {...props}></LoginPage>}
         ></Route>
         <Route
-          path="/home"
+          path={["/home", "/sources"]}
           render={(props) => <LandingPage {...props}></LandingPage>}
         ></Route>
         <Route
-          path="/sources"
-          render={(props) => <SourcesPage {...props}></SourcesPage>}
+          path="/"
+          render={(props) => <RegisterPage {...props}></RegisterPage>}
         ></Route>
       </Switch>
     </BrowserRouter>

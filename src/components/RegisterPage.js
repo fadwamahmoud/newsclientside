@@ -71,7 +71,8 @@ class RegisterPage extends React.Component {
     },
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     if (Object.keys(this.state.errors).length === 0) {
       const user = {
         fullName: this.state.fullName,
@@ -79,13 +80,13 @@ class RegisterPage extends React.Component {
         password: this.state.password,
       };
       axios
-        .post(`${process.env.URL}/user/register`, user)
+        .post(`${process.env.REACT_APP_HEROKU_URL}/user/register`, user)
         .then((response) => {
           if ((response.status = 202)) {
             // login
 
             axios
-              .post(`${process.env.URL}/user/login`, user)
+              .post(`${process.env.REACT_APP_HEROKU_URL}/user/login`, user)
               .then((response) => {
                 localStorage.setItem("token", response.data.token);
                 this.props.history.push("/home");
@@ -147,19 +148,21 @@ class RegisterPage extends React.Component {
               <Container>
                 <Row>
                   <Col className="offset-lg-0 offset-md-3" lg="5" md="6">
-                    <Card className="card-register">
-                      <CardHeader>
-                        <CardImg
-                          alt="..."
-                          src={"./assets/img/square-purple-1.png"}
-                        />
-                        <CardTitle tag="h4">Register</CardTitle>
-                      </CardHeader>
-                      <CardBody>
-                        <Form
-                          style={{ display: "flex", flexDirection: "column" }}
-                          className="form"
-                        >
+                    <Form
+                      method="post"
+                      style={{ display: "flex", flexDirection: "column" }}
+                      className="form"
+                      onSubmit={this.handleSubmit}
+                    >
+                      <Card className="card-register">
+                        <CardHeader>
+                          <CardImg
+                            alt="..."
+                            src={"./assets/img/square-purple-1.png"}
+                          />
+                          <CardTitle tag="h4">Register</CardTitle>
+                        </CardHeader>
+                        <CardBody>
                           <InputGroup
                             className={
                               this.state.errors.fullName
@@ -244,7 +247,7 @@ class RegisterPage extends React.Component {
                               onChange={this.handleValidation}
                               name="password"
                               placeholder="Password"
-                              type="text"
+                              type="password"
                               onFocus={(e) =>
                                 this.setState({ passwordFocus: true })
                               }
@@ -258,19 +261,19 @@ class RegisterPage extends React.Component {
                               {this.state.errors.password}
                             </span>
                           )}
-                        </Form>
-                      </CardBody>
-                      <CardFooter>
-                        <Button
-                          onClick={this.handleSubmit}
-                          className="btn-round"
-                          color="primary"
-                          size="lg"
-                        >
-                          Register
-                        </Button>
-                      </CardFooter>
-                    </Card>
+                        </CardBody>
+                        <CardFooter>
+                          <Button
+                            className="btn-round"
+                            color="primary"
+                            size="lg"
+                            type="submit"
+                          >
+                            Register
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </Form>
                   </Col>
                 </Row>
                 <div className="register-bg" />
