@@ -139,7 +139,7 @@ class PagesNavbar extends React.Component {
                   localStorage.setItem("token", "");
                 }}
                 className="text-white"
-                to="/"
+                to="/login"
               >
                 Logout
               </Link>
