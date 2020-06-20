@@ -32,6 +32,7 @@ class HomePage extends React.Component {
         <div className="wrapper">
           <img
             alt="..."
+            style={{ width: "700px" }}
             className="shapes wave"
             src={"./assets/img/waves.png"}
           />
