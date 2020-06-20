@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* BLK Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/blk-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/blk-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import axios from "axios";
 // reactstrap components
@@ -29,15 +12,16 @@ class SourcesPage extends React.Component {
   componentDidMount() {
     const getNews = async () => {
       axios
-        .get(`${process.env.REACT_APP_HEROKU_URL}/user/sources`, {
+        .get(`${process.env.REACT_APP_LOCAL_URL}/user/sources`, {
           headers: { Authorization: localStorage.getItem("token") },
         })
         .then(({ data }) => {
-          console.log(data);
           this.setState({ sources: data });
         })
         .catch((err) => {
           // 422 error no token => redirect to login page
+          // and alert that user that the session has ended
+          window.alert("your session has ended, please re-login");
           this.props.history.push("/login");
         });
     };
@@ -47,7 +31,7 @@ class SourcesPage extends React.Component {
     // variable action is either subscribe or unsubscribe
     axios
       .patch(
-        `${process.env.REACT_APP_HEROKU_URL}/user/${action}/${sourceId}`,
+        `${process.env.REACT_APP_LOCAL_URL}/user/${action}/${sourceId}`,
         null,
         {
           headers: { Authorization: localStorage.getItem("token") },
@@ -70,13 +54,15 @@ class SourcesPage extends React.Component {
         this.setState({ sources: newSources });
       })
       .catch((err) => {
+        // and alert that user that the session has ended
+        window.alert("your session has ended, please re-login");
         this.props.history.push("/login");
       });
   };
   handleUnsubscribe = async (sourceId) => {
     await axios
       .patch(
-        `${process.env.REACT_APP_HEROKU_URL}/user/unsubscribe/${sourceId}`,
+        `${process.env.REACT_APP_LOCAL_URL}/user/unsubscribe/${sourceId}`,
         null,
         {
           headers: { Authorization: localStorage.getItem("token") },
@@ -84,6 +70,8 @@ class SourcesPage extends React.Component {
       )
       .then()
       .catch((err) => {
+        // and alert that user that the session has ended
+        window.alert("your session has ended, please re-login");
         this.props.history.push("/login");
       });
   };

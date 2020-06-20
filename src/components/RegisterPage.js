@@ -2,7 +2,6 @@ import React from "react";
 import classnames from "classnames";
 import axios from "axios";
 import Joi from "@hapi/joi";
-import { login } from "../helpers/helpers";
 
 // reactstrap components
 import {
@@ -24,16 +23,13 @@ import {
   Alert,
 } from "reactstrap";
 
-// core components
-import ExamplesNavbar from "./ExamplesNavbar.js";
-import Footer from "./Footer.js";
-
 class RegisterPage extends React.Component {
   state = {
     fullName: "",
     email: "",
     password: "",
     errors: { fullName: "" },
+    status: "",
     schema: {
       fullName: Joi.object({
         fullName: Joi.string().min(10).max(50).required().messages({
@@ -73,6 +69,7 @@ class RegisterPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ ...this.state, status: "loading" });
     if (Object.keys(this.state.errors).length === 0) {
       const user = {
         fullName: this.state.fullName,
@@ -80,22 +77,29 @@ class RegisterPage extends React.Component {
         password: this.state.password,
       };
       axios
-        .post(`${process.env.REACT_APP_HEROKU_URL}/user/register`, user)
+        .post(`${process.env.REACT_APP_LOCAL_URL}/user/register`, user)
         .then((response) => {
           if ((response.status = 202)) {
             // login
-
             axios
-              .post(`${process.env.REACT_APP_HEROKU_URL}/user/login`, user)
+              .post(`${process.env.REACT_APP_LOCAL_URL}/user/login`, user)
               .then((response) => {
                 localStorage.setItem("token", response.data.token);
                 this.props.history.push("/home");
               })
-              .catch((error) => {});
+              .catch((error) => {
+                this.setState({
+                  ...this.state,
+                  status: "could not login",
+                });
+              });
           }
         })
         .catch((error) => {
-          console.log(error.response);
+          this.setState({
+            ...this.state,
+            status: "email is duplicate",
+          });
         });
     }
   };
@@ -260,16 +264,27 @@ class RegisterPage extends React.Component {
                               {this.state.errors.password}
                             </span>
                           )}
+                          {this.state.status !== "loading" && (
+                            <span className="errorspan">
+                              {this.state.status}
+                            </span>
+                          )}
                         </CardBody>
                         <CardFooter>
-                          <Button
-                            className="btn-round"
-                            color="primary"
-                            size="lg"
-                            type="submit"
-                          >
-                            Register
-                          </Button>
+                          {this.state.status === "loading" ? (
+                            <div class="alert alert-default" role="alert">
+                              Loading.....
+                            </div>
+                          ) : (
+                            <Button
+                              className="btn-round"
+                              color="primary"
+                              size="lg"
+                              type="submit"
+                            >
+                              Register
+                            </Button>
+                          )}
                         </CardFooter>
                       </Card>
                     </Form>

@@ -12,7 +12,6 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 class PagesNavbar extends React.Component {
@@ -97,6 +96,10 @@ class PagesNavbar extends React.Component {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to={"/"}>NEWS•DOT COM</Link>
+                  <br></br>
+                  {this.props.path !== "/register" && (
+                    <Link to={"/register"}>register</Link>
+                  )}
                 </Col>
                 <Col className="collapse-close text-right" xs="6">
                   <button
@@ -109,6 +112,18 @@ class PagesNavbar extends React.Component {
                 </Col>
               </Row>
             </div>
+            {(this.props.path === "/home" ||
+              this.props.path === "/sources") && (
+              <Link
+                onClick={() => {
+                  localStorage.setItem("token", "");
+                }}
+                className="text-white"
+                to="/"
+              >
+                Logout
+              </Link>
+            )}
             {this.props.path !== "/home" && this.props.path !== "/sources" && (
               <Nav navbar>
                 {this.props.path !== "/register" && (
@@ -124,11 +139,7 @@ class PagesNavbar extends React.Component {
                     </Button>
                   </NavItem>
                 )}
-                <NavItem>
-                  {/* <NavLink to="/register">
-                  Back to Kit
-                </NavLink> */}
-                </NavItem>
+
                 {this.props.path !== "/login" && (
                   <NavItem>
                     <NavLink>

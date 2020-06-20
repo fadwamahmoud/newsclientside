@@ -2,21 +2,15 @@ import React from "react";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
-  CardSubtitle,
   CardText,
-  ListGroupItem,
-  ListGroup,
   Container,
   Row,
   Col,
-  CardImg,
-  Alert,
 } from "reactstrap";
-const Sources = ({ sources, handleSubscribe, handleUnsubscribe }) => {
+const Sources = ({ sources, handleSubscribe }) => {
   return (
     <Container>
       <div>
@@ -36,13 +30,11 @@ const Sources = ({ sources, handleSubscribe, handleUnsubscribe }) => {
                 <CardText>
                   <h5>{source.description}</h5>
                 </CardText>
-                {/* <CardText>{source.url}</CardText> */}
                 <CardText>
                   {" "}
                   <h5>Category: {source.category}</h5>
                 </CardText>
               </CardBody>
-              {/* <CardFooter>{source.url}</CardFooter> */}
               <CardFooter>
                 <Button
                   className={

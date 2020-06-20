@@ -2,9 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import axios from "axios";
 
-import { Redirect } from "react-router-dom";
 import Joi from "@hapi/joi";
-import { login } from "../helpers/helpers";
 
 // reactstrap components
 import {
@@ -23,20 +21,14 @@ import {
   Container,
   Row,
   Col,
-  Alert,
 } from "reactstrap";
-
-// core components
-import ExamplesNavbar from "./ExamplesNavbar.js";
-import Footer from "./Footer.js";
 
 class LoginPage extends React.Component {
   state = {
     email: "",
     password: "",
     errors: { password: "" },
-    statusCode: "",
-    invalidMsg: "",
+    status: "",
     schema: {
       password: Joi.object({
         password: Joi.string().required().messages({
@@ -64,6 +56,7 @@ class LoginPage extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    this.setState({ ...this.state, status: "loading" });
     if (Object.keys(this.state.errors).length === 0) {
       const user = {
         email: this.state.email,
@@ -72,7 +65,7 @@ class LoginPage extends React.Component {
 
       // login request
       axios
-        .post(`${process.env.REACT_APP_HEROKU_URL}/user/login`, user)
+        .post(`${process.env.REACT_APP_LOCAL_URL}/user/login`, user)
         .then((response) => {
           localStorage.setItem("token", response.data.token);
           this.props.history.push("/home");
@@ -80,7 +73,7 @@ class LoginPage extends React.Component {
         .catch((error) => {
           this.setState({
             ...this.state,
-            invalidMsg: "username or password are incorrect",
+            status: "username or password are incorrect",
           });
         });
     }
@@ -210,21 +203,28 @@ class LoginPage extends React.Component {
                               {this.state.errors.password}
                             </span>
                           )}
-                          {this.state.invalidMsg && (
+                          {this.state.status ===
+                            "username or password are incorrect" && (
                             <span className="errorspan">
-                              {this.state.invalidMsg}
+                              {this.state.status}
                             </span>
                           )}
                         </CardBody>
                         <CardFooter>
-                          <Button
-                            type="submit"
-                            className="btn-round"
-                            color="primary"
-                            size="lg"
-                          >
-                            Login
-                          </Button>
+                          {this.state.status === "loading" ? (
+                            <div class="alert alert-default" role="alert">
+                              Loading.....
+                            </div>
+                          ) : (
+                            <Button
+                              type="submit"
+                              className="btn-round"
+                              color="primary"
+                              size="lg"
+                            >
+                              Login
+                            </Button>
+                          )}
                         </CardFooter>
                       </Card>
                     </Form>

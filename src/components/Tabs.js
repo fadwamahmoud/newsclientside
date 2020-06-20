@@ -42,15 +42,19 @@ const Tabs = (props) => {
         </div>
       </div>
       <div class="card-body ">
-        <img alt="..." className="shapes wave" src={"./assets/img/waves.png"} />
-
-        <img
-          alt="..."
-          className="shapes circle"
-          src={"./assets/img/cercuri.png"}
-        />
         <div class="tab-content text-center">
           <div class="tab-pane active" id="home">
+            <img
+              alt="..."
+              className="shapes wave"
+              src={"./assets/img/waves.png"}
+            />
+
+            <img
+              alt="..."
+              className="shapes circle"
+              src={"./assets/img/cercuri.png"}
+            />
             <p>
               I think that&#x2019;s a responsibility that I have, to push
               possibilities, to show people, this is the level that things could

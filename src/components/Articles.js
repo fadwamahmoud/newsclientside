@@ -1,25 +1,27 @@
 import React from "react";
+import { faNewspaper, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
-  CardSubtitle,
   CardText,
-  ListGroupItem,
-  ListGroup,
   Container,
   Row,
   Col,
   CardImg,
-  Alert,
 } from "reactstrap";
 const Articles = ({ articles }) => {
+  const formatDate = (unformattedDate) => {
+    const d = new Date(unformattedDate).toDateString();
+
+    return d;
+  };
   return (
     <>
-      {articles.length > 0 && (
+      {articles && (
         <Container>
           <div>
             {articles.map((article) => {
@@ -31,7 +33,10 @@ const Articles = ({ articles }) => {
                     </CardTitle>
                     <Row>
                       <Col>
-                        <CardImg alt="" src={article.urlToImage}></CardImg>
+                        <CardImg
+                          alt={"no image available"}
+                          src={article.urlToImage}
+                        ></CardImg>
                       </Col>
                       <Col>
                         <CardText>
@@ -40,7 +45,7 @@ const Articles = ({ articles }) => {
                         <CardText>
                           <h4>{article.description}</h4>
                         </CardText>
-                        <Button>
+                        <Button className="btn-neutral" color={"primary"}>
                           <a alt="" href={article.url}>
                             Read more
                           </a>
@@ -48,8 +53,24 @@ const Articles = ({ articles }) => {
                       </Col>
                     </Row>
                   </CardBody>
-                  <CardFooter>{article.publishedAt}</CardFooter>
-                  <CardFooter>{article.author}</CardFooter>
+
+                  <CardFooter>
+                    <div className="text-info">
+                      <FontAwesomeIcon
+                        style={{ marginRight: "10px" }}
+                        icon={faNewspaper}
+                      ></FontAwesomeIcon>
+                      {formatDate(article.publishedAt)}
+                    </div>
+
+                    <div className="text-info">
+                      <FontAwesomeIcon
+                        style={{ marginRight: "10px" }}
+                        icon={faUser}
+                      ></FontAwesomeIcon>
+                      {article.author}
+                    </div>
+                  </CardFooter>
                 </Card>
               );
             })}

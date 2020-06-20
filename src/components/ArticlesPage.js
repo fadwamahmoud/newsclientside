@@ -4,31 +4,42 @@ import Articles from "./Articles";
 import { Link } from "react-router-dom";
 import PaginationComponent from "./Pagination";
 import { Col } from "reactstrap";
-import Tabs from "./Tabs";
+
 const ArticlesPage = (props) => {
   const [articles, setState] = useState([]);
   const [activePage, setActivePage] = useState(1);
-  const [maxPage, setMaxPage] = useState(0);
-  const getNews = async () => {
+  const [maxPage, setMaxPage] = useState(10);
+  const getNews = async (pageNumber) => {
     axios
-      .get(`${process.env.REACT_APP_HEROKU_URL}/user/feed/${activePage}`, {
+      .get(`${process.env.REACT_APP_LOCAL_URL}/user/feed/${pageNumber}`, {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then(({ data }) => {
-        setState(data.articles);
-        setMaxPage(Math.ceil(data.totalResults / 10));
+        if (data === "no subscriptions") {
+          setState(data);
+        } else {
+          setState(data.articles);
+          // maximum newsapi reults for free is 10 so thats the max page number
+          // in case number of results is less than 100 set the maxpage
+          const max = Math.ceil(data.totalResults / 10);
+          max <= 10 && setMaxPage(max);
+        }
       })
       .catch((err) => {
-        console.log(err);
         // 422 error no token => redirect to login page
+        // and alert that user that the session has ended
+        window.alert("your session has ended, please re-login");
         props.history.push("/login");
       });
   };
   const handlePagination = (pageNumber) => {
-    window.scrollTo(0, 0);
-    // when user clicks page number get more news with active page number as result page
-    setActivePage(pageNumber);
-    getNews(activePage);
+    if (pageNumber <= maxPage) {
+      // scroll back to top
+      window.scrollTo(0, 400);
+      // when user clicks page number get more news with active page number as result page
+      setActivePage(pageNumber);
+      getNews(pageNumber);
+    }
   };
   useEffect(() => {
     getNews(activePage);

@@ -26,8 +26,10 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip
+  UncontrolledTooltip,
 } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInbox } from "@fortawesome/free-solid-svg-icons";
 
 class Footer extends React.Component {
   render() {
@@ -41,23 +43,23 @@ class Footer extends React.Component {
             <Col md="3">
               <Nav>
                 <NavItem>
-                  <NavLink to="/" tag={Link}>
+                  <NavLink to="/home" tag={Link}>
                     Home
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/landing-page" tag={Link}>
+                  <NavLink to="/" tag={Link}>
                     Landing
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/register-page" tag={Link}>
+                  <NavLink to="/register" tag={Link}>
                     Register
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/profile-page" tag={Link}>
-                    Profile
+                  <NavLink to="/login" tag={Link}>
+                    Login
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -65,19 +67,13 @@ class Footer extends React.Component {
             <Col md="3">
               <Nav>
                 <NavItem>
-                  <NavLink href="https://creative-tim.com/contact-us?ref=blkdsr-footer">
-                    Contact Us
-                  </NavLink>
+                  <NavLink>Contact Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="https://creative-tim.com/about-us?ref=blkdsr-footer">
-                    About Us
-                  </NavLink>
+                  <NavLink>About Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="https://creative-tim.com/blog?ref=blkdsr-footer">
-                    Blog
-                  </NavLink>
+                  <NavLink>Blog</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="https://opensource.org/licenses/MIT">
@@ -92,11 +88,10 @@ class Footer extends React.Component {
                 <Button
                   className="btn-icon btn-neutral btn-round btn-simple"
                   color="default"
-                  href="https://twitter.com/creativetim"
                   id="tooltip622135962"
                   target="_blank"
                 >
-                  <i className="fab fa-twitter" />
+                  <FontAwesomeIcon icon={faInbox}></FontAwesomeIcon>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip622135962">
                   Follow us
@@ -104,11 +99,10 @@ class Footer extends React.Component {
                 <Button
                   className="btn-icon btn-neutral btn-round btn-simple"
                   color="default"
-                  href="https://www.facebook.com/creativetim"
                   id="tooltip230450801"
                   target="_blank"
                 >
-                  <i className="fab fa-facebook-square" />
+                  <FontAwesomeIcon icon={faInbox}></FontAwesomeIcon>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip230450801">
                   Like us
@@ -116,11 +110,10 @@ class Footer extends React.Component {
                 <Button
                   className="btn-icon btn-neutral btn-round btn-simple"
                   color="default"
-                  href="https://dribbble.com/creativetim"
                   id="tooltip318450378"
                   target="_blank"
                 >
-                  <i className="fab fa-dribbble" />
+                  <FontAwesomeIcon icon={faInbox}></FontAwesomeIcon>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip318450378">
                   Follow us

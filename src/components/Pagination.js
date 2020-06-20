@@ -6,13 +6,12 @@ const PaginationComponent = ({ maxPage, activePage, handlePagination }) => {
   const handleIncN = () => {
     // m is the new value that will replace m
     let m = activePage + 1;
-    // only incremet row of numbers if active page is more than 2 numbers less than max page number
-    if (activePage < maxPage - 2) {
-      // set state
-      setN(m);
-    }
+
+    // only incremet row of numbers if active page is less than max page number
     // only increment active button if smaller than max
     if (m <= maxPage) {
+      // set state
+      setN(m);
       // set active button
       handlePagination(m);
     }
