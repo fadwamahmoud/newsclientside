@@ -12,7 +12,7 @@ class SourcesPage extends React.Component {
   componentDidMount() {
     const getNews = async () => {
       axios
-        .get(`${process.env.REACT_APP_LOCAL_URL}/user/sources`, {
+        .get(`${process.env.REACT_APP_HEROKU_URL}/user/sources`, {
           headers: { Authorization: localStorage.getItem("token") },
         })
         .then(({ data }) => {
@@ -31,7 +31,7 @@ class SourcesPage extends React.Component {
     // variable action is either subscribe or unsubscribe
     axios
       .patch(
-        `${process.env.REACT_APP_LOCAL_URL}/user/${action}/${sourceId}`,
+        `${process.env.REACT_APP_HEROKU_URL}/user/${action}/${sourceId}`,
         null,
         {
           headers: { Authorization: localStorage.getItem("token") },
@@ -62,7 +62,7 @@ class SourcesPage extends React.Component {
   handleUnsubscribe = async (sourceId) => {
     await axios
       .patch(
-        `${process.env.REACT_APP_LOCAL_URL}/user/unsubscribe/${sourceId}`,
+        `${process.env.REACT_APP_HEROKU_URL}/user/unsubscribe/${sourceId}`,
         null,
         {
           headers: { Authorization: localStorage.getItem("token") },

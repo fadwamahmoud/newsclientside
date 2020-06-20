@@ -11,7 +11,7 @@ const ArticlesPage = (props) => {
   const [maxPage, setMaxPage] = useState(10);
   const getNews = async (pageNumber) => {
     axios
-      .get(`${process.env.REACT_APP_LOCAL_URL}/user/feed/${pageNumber}`, {
+      .get(`${process.env.REACT_APP_HEROKU_URL}/user/feed/${pageNumber}`, {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then(({ data }) => {

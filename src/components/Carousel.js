@@ -18,7 +18,7 @@ const Carousell = () => {
   const [featuredNews, setFeaturedNews] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_LOCAL_URL}/headlines`)
+      .get(`${process.env.REACT_APP_HEROKU_URL}/headlines`)
       .then(({ data }) => {
         setFeaturedNews(data);
       });
