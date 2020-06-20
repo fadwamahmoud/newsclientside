@@ -6,7 +6,9 @@ import "./assets/css/nucleo-icons.css";
 import "./assets/css/custom.css";
 import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/LoginPage";
-import SourcesPage from "./components/SourcesPage";
+import HomePage from "./components/HomePage";
+import Footer from "./components/Footer";
+import ExamplesNavbar from "./components/ExamplesNavbar";
 
 function App() {
   return (
@@ -14,21 +16,43 @@ function App() {
       <Switch>
         <Route
           path="/register"
-          render={(props) => <RegisterPage {...props}></RegisterPage>}
+          render={(props) => (
+            <>
+              <ExamplesNavbar path={props.match.path} />
+              <RegisterPage {...props}></RegisterPage>
+            </>
+          )}
         ></Route>
         <Route
           path="/login"
-          render={(props) => <LoginPage {...props}></LoginPage>}
+          render={(props) => (
+            <>
+              <ExamplesNavbar path={props.match.path} />
+              <LoginPage {...props}></LoginPage>
+            </>
+          )}
         ></Route>
         <Route
           path={["/home", "/sources"]}
-          render={(props) => <LandingPage {...props}></LandingPage>}
+          render={(props) => (
+            <>
+              <ExamplesNavbar path={props.match.path} />
+              <LandingPage {...props}></LandingPage>
+            </>
+          )}
         ></Route>
+
         <Route
           path="/"
-          render={(props) => <RegisterPage {...props}></RegisterPage>}
+          render={(props) => (
+            <>
+              <ExamplesNavbar path={props.match.path} />
+              <HomePage {...props}></HomePage>
+            </>
+          )}
         ></Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

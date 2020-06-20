@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* BLK Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/blk-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/blk-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -88,13 +71,11 @@ class PagesNavbar extends React.Component {
       >
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand to="/home" id="navbar-brand" tag={Link}>
+            <NavbarBrand to="/" id="navbar-brand" tag={Link}>
               <span>NEWS• </span>
-              BLA BLA BLA
+              DOT COM
             </NavbarBrand>
-            <UncontrolledTooltip placement="bottom" target="navbar-brand">
-              Designed and Coded by Creative Tim
-            </UncontrolledTooltip>
+
             <button
               aria-expanded={this.state.collapseOpen}
               className="navbar-toggler navbar-toggler"
@@ -115,9 +96,7 @@ class PagesNavbar extends React.Component {
             <div className="navbar-collapse-header">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    BLK•React
-                  </a>
+                  <Link to={"/"}>NEWS•DOT COM</Link>
                 </Col>
                 <Col className="collapse-close text-right" xs="6">
                   <button
@@ -130,65 +109,35 @@ class PagesNavbar extends React.Component {
                 </Col>
               </Row>
             </div>
-            <Nav navbar>
-              <NavItem className="p-0">
-                <NavLink
-                  data-placement="bottom"
-                  href="https://twitter.com/CreativeTim"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  title="Follow us on Twitter"
-                >
-                  <i className="fab fa-twitter" />
-                  <p className="d-lg-none d-xl-none">Twitter</p>
-                </NavLink>
-              </NavItem>
-              <NavItem className="p-0">
-                <NavLink
-                  data-placement="bottom"
-                  href="https://www.facebook.com/CreativeTim"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  title="Like us on Facebook"
-                >
-                  <i className="fab fa-facebook-square" />
-                  <p className="d-lg-none d-xl-none">Facebook</p>
-                </NavLink>
-              </NavItem>
-              <NavItem className="p-0">
-                <NavLink
-                  data-placement="bottom"
-                  href="https://www.instagram.com/CreativeTimOfficial"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  title="Follow us on Instagram"
-                >
-                  <i className="fab fa-instagram" />
-                  <p className="d-lg-none d-xl-none">Instagram</p>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <Button
-                  className="nav-link d-none d-lg-block"
-                  color="primary"
-                  target="_blank"
-                >
-                  <Link to="/register">
-                    <i className="tim-icons icon-spaceship" /> Register
-                  </Link>
-                </Button>
-              </NavItem>
-              <NavItem>
-                {/* <NavLink to="/register">
+            {this.props.path !== "/home" && this.props.path !== "/sources" && (
+              <Nav navbar>
+                {this.props.path !== "/register" && (
+                  <NavItem>
+                    <Button
+                      className="nav-link d-none d-lg-block"
+                      color="primary"
+                      target="_blank"
+                    >
+                      <Link to="/register">
+                        <i className="tim-icons icon-spaceship" /> Register
+                      </Link>
+                    </Button>
+                  </NavItem>
+                )}
+                <NavItem>
+                  {/* <NavLink to="/register">
                   Back to Kit
                 </NavLink> */}
-              </NavItem>
-              <NavItem>
-                <NavLink>
-                  <Link to="/login">Have an account? Login</Link>
-                </NavLink>
-              </NavItem>
-            </Nav>
+                </NavItem>
+                {this.props.path !== "/login" && (
+                  <NavItem>
+                    <NavLink>
+                      <Link to="/login">Have an account? Login</Link>
+                    </NavLink>
+                  </NavItem>
+                )}
+              </Nav>
+            )}
           </Collapse>
         </Container>
       </Navbar>

@@ -55,6 +55,18 @@ const Carousell = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+      <img
+        alt="..."
+        className="shapes triangle"
+        src={"./assets/img/triunghiuri.png"}
+        style={{ height: "300px" }}
+      />
+      <img
+        alt="..."
+        className="shapes squares"
+        src={"./assets/img/patrat.png"}
+        style={{ height: "300px" }}
+      />
     </Col>
   );
 };

@@ -29,7 +29,7 @@ class SourcesPage extends React.Component {
   componentDidMount() {
     const getNews = async () => {
       axios
-        .get(`${process.env.REACT_APP_HEROKU_URL}/user/sources`, {
+        .get(`${process.env.REACT_APP_LOCAL_URL}/user/sources`, {
           headers: { Authorization: localStorage.getItem("token") },
         })
         .then(({ data }) => {
@@ -47,7 +47,7 @@ class SourcesPage extends React.Component {
     // variable action is either subscribe or unsubscribe
     axios
       .patch(
-        `${process.env.REACT_APP_HEROKU_URL}/user/${action}/${sourceId}`,
+        `${process.env.REACT_APP_LOCAL_URL}/user/${action}/${sourceId}`,
         null,
         {
           headers: { Authorization: localStorage.getItem("token") },
@@ -70,13 +70,13 @@ class SourcesPage extends React.Component {
         this.setState({ sources: newSources });
       })
       .catch((err) => {
-        console.log(err);
+        this.props.history.push("/login");
       });
   };
   handleUnsubscribe = async (sourceId) => {
     await axios
       .patch(
-        `${process.env.REACT_APP_HEROKU_URL}/user/unsubscribe/${sourceId}`,
+        `${process.env.REACT_APP_LOCAL_URL}/user/unsubscribe/${sourceId}`,
         null,
         {
           headers: { Authorization: localStorage.getItem("token") },
@@ -84,18 +84,22 @@ class SourcesPage extends React.Component {
       )
       .then()
       .catch((err) => {
-        console.log(err);
+        this.props.history.push("/login");
       });
   };
   render() {
     return (
       <>
         {this.state.sources.length > 0 ? (
-          <Sources
-            handleSubscribe={this.handleSubscribe}
-            handleUnsubscribe={this.handleUnsubscribe}
-            sources={this.state.sources}
-          ></Sources>
+          <>
+            <img alt="..." className="path" src={"./assets/img/blob.png"} />
+            <img alt="..." className="path" src={"./assets/img/path4.png"} />
+            <Sources
+              handleSubscribe={this.handleSubscribe}
+              handleUnsubscribe={this.handleUnsubscribe}
+              sources={this.state.sources}
+            ></Sources>
+          </>
         ) : (
           <div
             style={{

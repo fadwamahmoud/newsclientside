@@ -42,6 +42,13 @@ const Tabs = (props) => {
         </div>
       </div>
       <div class="card-body ">
+        <img alt="..." className="shapes wave" src={"./assets/img/waves.png"} />
+
+        <img
+          alt="..."
+          className="shapes circle"
+          src={"./assets/img/cercuri.png"}
+        />
         <div class="tab-content text-center">
           <div class="tab-pane active" id="home">
             <p>
@@ -83,5 +90,4 @@ const Tabs = (props) => {
     </>
   );
 };
-
 export default Tabs;

@@ -80,13 +80,13 @@ class RegisterPage extends React.Component {
         password: this.state.password,
       };
       axios
-        .post(`${process.env.REACT_APP_HEROKU_URL}/user/register`, user)
+        .post(`${process.env.REACT_APP_LOCAL_URL}/user/register`, user)
         .then((response) => {
           if ((response.status = 202)) {
             // login
 
             axios
-              .post(`${process.env.REACT_APP_HEROKU_URL}/user/login`, user)
+              .post(`${process.env.REACT_APP_LOCAL_URL}/user/login`, user)
               .then((response) => {
                 localStorage.setItem("token", response.data.token);
                 this.props.history.push("/home");
@@ -140,7 +140,6 @@ class RegisterPage extends React.Component {
   render() {
     return (
       <>
-        <ExamplesNavbar />
         <div className="wrapper">
           <div className="page-header">
             <div className="page-header-image" />
@@ -280,7 +279,6 @@ class RegisterPage extends React.Component {
               </Container>
             </div>
           </div>
-          <Footer />
         </div>
       </>
     );
