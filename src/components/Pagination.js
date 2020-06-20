@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classnames from "classnames";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 const PaginationComponent = ({ maxPage, activePage, handlePagination }) => {
   const [n, setN] = useState(1);
@@ -33,23 +34,39 @@ const PaginationComponent = ({ maxPage, activePage, handlePagination }) => {
   };
   return (
     <Pagination listClassName="justify-content-center">
-      <PaginationItem>
+      <PaginationItem className={{ disabled: activePage === 1 }}>
         <PaginationLink onClick={handleDecN}>Previous</PaginationLink>
       </PaginationItem>
-      <PaginationItem className={activePage === n && "active"}>
+      <PaginationItem
+        className={classnames(
+          { active: activePage === n },
+          { disabled: n > maxPage }
+        )}
+      >
         <PaginationLink onClick={() => handlePagination(n)}>{n}</PaginationLink>
       </PaginationItem>
-      <PaginationItem className={activePage === n + 1 && "active"}>
+      <PaginationItem
+        className={classnames(
+          { active: activePage === n + 1 },
+          { disabled: n + 1 > maxPage }
+        )}
+      >
         <PaginationLink onClick={() => handlePagination(n + 1)}>
           {n + 1}
         </PaginationLink>
       </PaginationItem>
-      <PaginationItem className={activePage === n + 2 && "active"}>
+      <PaginationItem
+        className={classnames(
+          { active: activePage === n + 2 },
+          { disabled: n + 2 > maxPage }
+        )}
+        // classNames={activePage === n + 2 && "active" ,""}
+      >
         <PaginationLink onClick={() => handlePagination(n + 2)}>
           {n + 2}
         </PaginationLink>
       </PaginationItem>
-      <PaginationItem>
+      <PaginationItem className={{ disabled: activePage === maxPage }}>
         <PaginationLink onClick={handleIncN}>Next</PaginationLink>
       </PaginationItem>
     </Pagination>

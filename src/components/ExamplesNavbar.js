@@ -70,7 +70,15 @@ class PagesNavbar extends React.Component {
       >
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand to="/" id="navbar-brand" tag={Link}>
+            <NavbarBrand
+              to={
+                this.props.path === "/home" || this.props.path === "/sources"
+                  ? "/home"
+                  : "/"
+              }
+              id="navbar-brand"
+              tag={Link}
+            >
               <span>NEWS• </span>
               DOT COM
             </NavbarBrand>
@@ -95,11 +103,23 @@ class PagesNavbar extends React.Component {
             <div className="navbar-collapse-header">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link to={"/"}>NEWS•DOT COM</Link>
+                  <Link
+                    to={
+                      this.props.path === "/home" ||
+                      this.props.path === "/sources"
+                        ? "/home"
+                        : "/"
+                    }
+                  >
+                    NEWS•DOT COM
+                  </Link>
+
                   <br></br>
-                  {this.props.path !== "/register" && (
-                    <Link to={"/register"}>register</Link>
-                  )}
+                  {this.props.path !== "/register" &&
+                    this.props.path !== "/sources" &&
+                    this.props.path !== "/home" && (
+                      <Link to={"/register"}>register</Link>
+                    )}
                 </Col>
                 <Col className="collapse-close text-right" xs="6">
                   <button
