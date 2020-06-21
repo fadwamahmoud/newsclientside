@@ -43,3 +43,4 @@ A react app that consumes a news API.
 [Heroku](https://dashboard.heroku.com/apps) - a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 [mars reate-react-app buildpack ](https://github.com/mars/create-react-app-buildpack) - Heroku Buildpack for create-react-app: static hosting for React.js web apps.
 
+### https://newsclientside.herokuapp.com
