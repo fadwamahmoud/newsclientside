@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NEWSDOTCOM
 
-## Available Scripts
+A clientside app that gets all the latest news using the NewsAPI endpoints https://newsapi.org/
 
-In the project directory, you can run:
+# Features
+  - View latest headlines : 
+  - Register
+  - Login
+  - subscribe and unubscribe from news sources
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Usage
+  - The Landing page displays the current BBC news headlines.
+  - Go to the register page and enter your information and you will get automatically logged in. Or login if you've previously registered.
+  - The home page will display two tabs one for your customized articles and another for subscribing/ unsubscribing to news sources.
+  - You will first see an empty articles page so go to the sources tab and start subscribing.
+  - Once you go back to the news tab you will find all the latest articles published by the sources you're subscribed to.
+  - Navigate through the pages for more articles.
+  - When you're done you can logout and you'll get redirected to the login page.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Built with
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* [ReactJS](https://breakdance.github.io/breakdance/) -  open-source JavaScript library for building user interfaces.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* [Reactstrap](https://reactstrap.github.io/) -  easy to use React Bootstrap 4 components compatible with React 16+.
+* [React bootstrap](https://react-bootstrap.github.io/) - The most popular front-end framework Rebuilt for React. Mostly similar to reactstrap, only used for a slightly better Carousel component.
+*  [ @fortawesome/react-fontawesome](https://www.npmjs.com/package/@fortawesome/react-fontawesome) - Font Awesome 5 React component using SVG with JS.
+*  [@hapi/joi](https://www.npmjs.com/package/@hapi/joi) - The most powerful schema description language and data validator for JavaScript. Used for registeration and login form validation.
+* [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js that supprts automatic transforms for JSON data. Used for making requests to the nodejs server.
+ ### UI Theme
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+* [BLK Design System](https://github.com/creativetimofficial/blk-design-system-react) - Used for some readyily made components and the dark visuals.
 
 ### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+[Heroku](https://dashboard.heroku.com/apps) - a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+[mars reate-react-app buildpack ](https://github.com/mars/create-react-app-buildpack) - Heroku Buildpack for create-react-app: static hosting for React.js web apps.
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
