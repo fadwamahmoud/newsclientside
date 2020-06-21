@@ -1,5 +1,7 @@
 # NEWSDOTCOM
 
+A react app that consumes a news API.
+
 # Features
   - View latest headlines : 
   - Register
