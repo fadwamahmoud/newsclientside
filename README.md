@@ -1,7 +1,5 @@
 # NEWSDOTCOM
 
-A clientside app that gets all the latest news using the NewsAPI endpoints https://newsapi.org/
-
 # Features
   - View latest headlines : 
   - Register
