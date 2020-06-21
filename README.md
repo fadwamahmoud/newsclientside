@@ -10,7 +10,7 @@ A clientside app that gets all the latest news using the NewsAPI endpoints https
 
 
 
-### Usage
+### Details
   - The Landing page displays the current BBC news headlines.
   - Go to the register page and enter your information and you will get automatically logged in. Or login if you've previously registered.
   - The home page will display two tabs one for your customized articles and another for subscribing/ unsubscribing to news sources.
